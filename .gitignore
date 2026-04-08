@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+
+# Virtual environments
+venv/
+.venv/
+env/
+imu_bt91/imu/
+
+# ROS 2 workspace artifacts
+/build/
+/install/
+/log/
+*.db3
+*.mcap
+
+# IDE / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
