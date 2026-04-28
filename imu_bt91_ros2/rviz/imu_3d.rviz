@@ -32,6 +32,14 @@ Visualization Manager:
       Namespaces:
         bt91_orientation: true
       Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Marker Topic: /imu/artificial_horizon
+      Name: Artificial Horizon
+      Namespaces:
+        artificial_horizon: true
+      Queue Size: 10
+      Value: true
     - Class: rviz_default_plugins/Axes
       Enabled: true
       Length: 0.5

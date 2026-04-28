@@ -23,6 +23,8 @@ setup(
     entry_points={
         "console_scripts": [
             "ble_imu_node = imu_bt91_ros2.ble_imu_node:main",
+            "artificial_horizon_node = imu_bt91_ros2.artificial_horizon_node:main",
+            "artificial_horizon_gui_node = imu_bt91_ros2.artificial_horizon_gui_node:main",
         ],
     },
 )

@@ -34,6 +34,18 @@ def generate_launch_description():
         output="screen",
     )
 
+    artificial_horizon_node = Node(
+        package="imu_bt91_ros2",
+        executable="artificial_horizon_node",
+        name="artificial_horizon_node",
+        parameters=[
+            {
+                "frame_id": LaunchConfiguration("frame_id"),
+            }
+        ],
+        output="screen",
+    )
+
     static_tf_node = Node(
         package="tf2_ros",
         executable="static_transform_publisher",
@@ -50,4 +62,4 @@ def generate_launch_description():
         output="screen",
     )
 
-    return LaunchDescription([address_arg, frame_arg, imu_node, static_tf_node, rviz_node])
+    return LaunchDescription([address_arg, frame_arg, imu_node, artificial_horizon_node, static_tf_node, rviz_node])

@@ -1,6 +1,6 @@
 # IMU BT91 en ROS 2
 
-Este repositorio incluye un paquete ROS 2 para leer una IMU BT91 por Bluetooth Low Energy y visualizar su orientacion en 3D con RViz2.
+Este repositorio incluye un paquete ROS 2 para leer una IMU BT91 por Bluetooth Low Energy, visualizar su orientacion en 3D y mostrar un horizonte artificial (en RViz2 o en ventana GUI sin RViz).
 
 ## Estructura
 
@@ -34,6 +34,28 @@ Con otra MAC:
 ros2 launch imu_bt91_ros2 imu_visualization.launch.py address:=AA:BB:CC:DD:EE:FF
 ```
 
+## Horizonte artificial sin RViz (ventana GUI)
+
+Opcion recomendada (levanta IMU + horizonte en una sola orden):
+
+```bash
+cd /home/ingeniero/Desktop/IMU_ROS2
+source install/setup.bash
+ros2 launch imu_bt91_ros2 imu_horizon_gui.launch.py
+```
+
+Con otra MAC:
+
+```bash
+ros2 launch imu_bt91_ros2 imu_horizon_gui.launch.py address:=AA:BB:CC:DD:EE:FF
+```
+
+Tambien lo puedes correr manual:
+
+```bash
+ros2 run imu_bt91_ros2 artificial_horizon_gui_node
+```
+
 ### Opcion 2: Nodo y RViz por separado (manual)
 
 Terminal 1:
@@ -49,13 +71,22 @@ Terminal 2:
 ```bash
 cd /home/ingeniero/Desktop/IMU_ROS2
 source install/setup.bash
+ros2 run imu_bt91_ros2 artificial_horizon_node
+```
+
+Terminal 3:
+
+```bash
+cd /home/ingeniero/Desktop/IMU_ROS2
+source install/setup.bash
 rviz2
 ```
 
 En RViz2 configura:
 1. `Global Options -> Fixed Frame`: `map`
 2. `Add -> Marker` y topic: `/imu/marker`
-3. (Opcional) `Add -> Axes` con `Reference Frame = imu_link`
+3. `Add -> MarkerArray` y topic: `/imu/artificial_horizon`
+4. (Opcional) `Add -> Axes` con `Reference Frame = imu_link`
 
 ## Verificar que la IMU este publicando
 
@@ -76,6 +107,7 @@ Si `/imu/euler_deg` cambia al mover la IMU, la lectura BLE esta correcta.
 - `/imu/data_raw` (`sensor_msgs/msg/Imu`)
 - `/imu/euler_deg` (`geometry_msgs/msg/Vector3Stamped`)
 - `/imu/marker` (`visualization_msgs/msg/Marker`)
+- `/imu/artificial_horizon` (`visualization_msgs/msg/MarkerArray`)
 
 ## Modo antiguo (sin ROS 2)
 
